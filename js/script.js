@@ -10,7 +10,6 @@ fetch(url)
 
 function processData(data) {
 	for (let article of data.articles) {
-		console.log(article)
 		let html = `<article>
 									<h1>${article.title}</h1>									
 									<img src="${article.urlToImage}"  alt="${article.title}"/>
