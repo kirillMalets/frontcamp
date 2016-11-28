@@ -52,6 +52,8 @@
 
 	var _newsFeed = __webpack_require__(299);
 
+	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"less!../less/styles.less\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
 	var url = 'https://newsapi.org/v1/articles?source=bbc-news&apiKey=5a17c17619c4477cafd1dd15468104ff',
 	    element = document.querySelector('#news-block');
 
@@ -72,7 +74,7 @@
 			for (var _iterator = data.articles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 				var article = _step.value;
 
-				element.insertAdjacentHTML('beforeEnd', _newsFeed.render);
+				element.insertAdjacentHTML('beforeEnd', (0, _newsFeed.render)(article));
 			}
 		} catch (err) {
 			_didIteratorError = true;
