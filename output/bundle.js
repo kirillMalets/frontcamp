@@ -50,7 +50,7 @@
 
 	__webpack_require__(298);
 
-	var _newsFeed = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"templates/news-feed\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _newsFeed = __webpack_require__(299);
 
 	var url = 'https://newsapi.org/v1/articles?source=bbc-news&apiKey=5a17c17619c4477cafd1dd15468104ff',
 	    element = document.querySelector('#news-block');
@@ -72,7 +72,7 @@
 			for (var _iterator = data.articles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 				var article = _step.value;
 
-				element.insertAdjacentHTML('beforeEnd', _newsFeed.html);
+				element.insertAdjacentHTML('beforeEnd', _newsFeed.render);
 			}
 		} catch (err) {
 			_didIteratorError = true;
@@ -8614,6 +8614,19 @@
 	  self.fetch.polyfill = true
 	})(typeof self !== 'undefined' ? self : this);
 
+
+/***/ },
+/* 299 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+										value: true
+	});
+	var render = exports.render = function render(article) {
+										return "<article>\n\t\t\t\t\t\t\t\t\t<h1>" + article.title + "</h1>\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t<img src=\"" + article.urlToImage + "\"  alt=\"" + article.title + "\"/>\n\t\t\t\t\t\t\t\t\t<span>Author: " + article.author + "</span>\n\t\t\t\t\t\t\t\t\t<p>" + article.description + "<a href=\"" + article.url + "\">... Read more</a></p>\n\t\t\t\t\t\t\t\t</article>";
+	};
 
 /***/ }
 /******/ ]);
