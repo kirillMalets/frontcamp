@@ -1,3 +1,8 @@
+'use strict';
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const webpack = require('webpack');
+
 module.exports = {
 	entry: './js/script.js',
 	output: {
@@ -15,12 +20,26 @@ module.exports = {
 		},
 		{
 			test: /\.less$/,
-			loader: "style-loader!less-loader!css-loader"
+			loader: "style-loader!css-loader!less-loader"
 		}]
 	},
-	watch: true,
+	plugins: [
+		new webpack.EnvironmentPlugin('NODE_ENV')
+	],
+	watch: NODE_ENV == 'development',
 	watchOptions: {
 		aggregateTimeout: 200
 	},
-	//devtool: 'source-map'
+	devtool: NODE_ENV == 'development' ?'source-map' : null
 };
+
+if (NODE_ENV == 'production') {
+	module.exports.plugins.push(
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false,
+				drop_console: true
+			}
+		})
+	);
+}
