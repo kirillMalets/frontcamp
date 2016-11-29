@@ -4,9 +4,10 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
 
 module.exports = {
-	entry: './js/script.js',
+	entry: './js/app.js',
 	output: {
 		path: './output',
+		publicPath: '/frontcamp/output/',
 		filename: 'bundle.js'
 	},
 	module: {
@@ -30,7 +31,7 @@ module.exports = {
 	watchOptions: {
 		aggregateTimeout: 200
 	},
-	devtool: NODE_ENV == 'development' ?'source-map' : null
+	devtool: NODE_ENV == 'development' ?'eval' : null
 };
 
 if (NODE_ENV == 'production') {
