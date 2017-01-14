@@ -1,0 +1,11 @@
+extends layout
+block content
+    h1= title
+    form#addArticle(name='addArticle', method='post', action='/api/articles', enctype='multipart/form-data')
+        label(for='title') Title
+        input#title(type='text', placeholder='Add title', name='title')
+        label(for='text') Text
+        textarea#text(name='text')
+        label(for='img') Image
+        input#img(type='file', name='titleImage')
+        button(type='submit') Submit
