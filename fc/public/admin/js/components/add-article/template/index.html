@@ -1,0 +1,8 @@
+<h2 ng-show="addArticleVM.isSuccess">Article added</h2>
+<form id="add-article" name="addArticle" enctype='multipart/form-data'>
+	<label for="title">Title</label>
+	<input type="text" ng-model="addArticleVM.context.title" id="title" required>
+	<label for="content">Content</label>
+	<textarea required ng-model="addArticleVM.context.content" minlength="20" id="content"></textarea>
+	<button ng-click="addArticleVM.submit()" ng-disabled="addArticle.$invalid">Submit</button>
+</form>

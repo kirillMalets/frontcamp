@@ -1,0 +1,10 @@
+<div>
+	{{articlesAmountVM}}
+	<h1>List of articles</h1>
+	<span>Artiles total: {{$ctrl.context.data.length}}</span>
+	<ul>
+		<li ng-repeat="item in $ctrl.context.data">
+			<h5><a ng-href="{{'/admin/article/' + item._id + '/edit'}}">{{item.title}}</a></h5>
+		</li>
+	</ul>
+</div>

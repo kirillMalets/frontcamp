@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var fallback = require('express-history-api-fallback');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -36,9 +37,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/users', users);
 // app.use('/form', form);
 app.use('/api/articles', article);
-app.get('/*', function(req, res) {
+app.get('/client', function(req, res) {
 	res.sendFile(path.resolve(__dirname, 'public/index.html'));
 });
+app.get('/admin/*', function(req, res) {
+	res.sendFile(path.resolve(__dirname, 'public/admin/index.html'));
+	// res.redirect('/admin/index.html');
+});
+/*var root = __dirname + '/public';
+app.use(express.static(root));
+app.use(fallback('index.html', { root: `${root}/admin` }));*/
+
 // app.use('/articles', singleArticle);
 
 // passport config

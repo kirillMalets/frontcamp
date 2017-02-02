@@ -2,23 +2,33 @@
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-	entry: './client/app.js',
+	entry: {
+		react: './client/app.js',
+		angular: './public/admin/js/app.js'
+	},
 	output: {
-		path: './public/javascript',
+		path: path.join('./public', "javascript"),
 		publicPath: '/public/javascript/',
-		filename: 'bundle.js'
+		filename: "[name].bundle.js",
 	},
 	module: {
-		loaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loader: 'babel-loader',
-			query: {
-				presets: ['es2015', 'react', 'stage-3']
-			}
-		}/*,
+		loaders: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader',
+				query: {
+					presets: ['es2015', 'react', 'stage-3']
+				}
+		},
+		{
+			test: /\.html$/,
+			loader: 'ngtemplate?relativeTo=' + (path.resolve(__dirname, './public/admin')) + '/!html'
+		}
+			/*,
 		{
 			test: /\.less$/,
 			loader: "style-loader!css-loader!less-loader"

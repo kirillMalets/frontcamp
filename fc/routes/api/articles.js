@@ -36,25 +36,39 @@ router.get('/:articleId', function(req, res, next) {
 
 router.post('/', upload.single('titleImage'), function(req, res, next) {
 	console.log(req.file);
-	fs.rename(
-		path.join(req.file.destination, req.file.filename),
-		path.join(req.file.destination, req.file.filename + path.extname(req.file.originalname)),
-		function(err) {
-			if (err) {
-				res.json({error: err});
-				return;
+	if(req.file) {
+		fs.rename(
+			path.join(req.file.destination, req.file.filename),
+			path.join(req.file.destination, req.file.filename + path.extname(req.file.originalname)),
+			function(err) {
+				if (err) {
+					res.json({error: err});
+					return;
+				}
+				const data = {
+					title: req.body.title,
+					text: req.body.text,
+					imagePath: `${imagePath}/${req.file.filename}${path.extname(req.file.originalname)}`
+				};
+				const article = new Article(data);
+				article.save(function(err, article) {
+					res.redirect(301, `/articles/${article._id}`)
+				})
 			}
-			const data = {
-				title: req.body.title,
-				text: req.body.text,
-				imagePath: `${imagePath}/${req.file.filename}${path.extname(req.file.originalname)}`
-			};
-			const article = new Article(data);
-			article.save(function(err, article) {
-				res.redirect(301, `/articles/${article._id}`)
+		);
+	} else {
+		const data = {
+			title: req.body.title,
+			text: req.body.text
+		};
+		const article = new Article(data);
+		article.save(function(err, article) {
+			res.json({
+				article: article
 			})
-		}
-	);
+		})
+	}
+
 });
 
 router.put('/:articleId', function(req, res, next) {
