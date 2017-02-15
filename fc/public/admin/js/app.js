@@ -7,7 +7,7 @@ import  './components/add-article/addArticle.module'
 import  './components/add-article/components/addArticle.component'
 import  './components/add-article/services/addArticle.factory'
 import './components/edit-article/editArticle.module'
-import './components/edit-article/edit-artcle.controller'
+import './components/edit-article/editArticle.controller'
 import './components/edit-article/services/editArticle.factory'
 
 angular.module('articleApp', ['ngRoute', 'articlesAmount', 'addArticle', 'editArticle']

@@ -11,7 +11,8 @@ angular.module('addArticle').component('addArticle', {
 	},
 	controller: ['addArticleFactory',	function addArticleCtrl(addArticleFactory) {
 		var vm = this;
-		//vm.article = vm.context || {};
+
+		console.log(22222);
 
 		vm.submit = function() {
 			addArticleFactory.addData(vm.context).then(function success(data) {
